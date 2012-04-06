@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\AR\include\AR.h" />
+    <ClInclude Include="..\AR\include\RobustEstimator.h" />
+    <ClInclude Include="..\AR\include\Rpoly.h" />
+    <ClInclude Include="..\AR\include\RPP.h" />
+    <ClInclude Include="..\AR\include\Utils.h" />
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\agast5_8.h" />
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\agast7_12d.h" />
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\agast7_12s.h" />
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\AstDetector.h" />
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\cvWrapper.h" />
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\oast9_16.h" />
+    <ClInclude Include="..\BriskOpenCV\brisk\brisk.h" />
+    <ClInclude Include="..\BriskOpenCV\brisk\hammingsse.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\AR\src\AR.cpp" />
+    <ClCompile Include="..\AR\src\RobustEstimator.cpp" />
+    <ClCompile Include="..\AR\src\Rpoly.cpp" />
+    <ClCompile Include="..\AR\src\RPP.cpp" />
+    <ClCompile Include="..\AR\src\Utils.cpp" />
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast5_8.cc" />
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast5_8_nms.cc" />
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast7_12d.cc" />
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast7_12d_nms.cc" />
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast7_12s.cc" />
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast7_12s_nms.cc" />
+    <ClCompile Include="..\BriskOpenCV\agast\src\AstDetector.cc" />
+    <ClCompile Include="..\BriskOpenCV\agast\src\nonMaximumSuppression.cc" />
+    <ClCompile Include="..\BriskOpenCV\agast\src\oast9_16.cc" />
+    <ClCompile Include="..\BriskOpenCV\agast\src\oast9_16_nms.cc" />
+    <ClCompile Include="..\BriskOpenCV\brisk\brisk.cpp" />
+    <ClCompile Include="main_FixAR.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{70B8013A-12C0-4DFA-851B-B8989A536629}</ProjectGuid>
+    <RootNamespace>FixAR</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../BriskOpenCV/agast/include;../AR/include;../3rdParty/Poco/Foundation/include;../3rdParty/Poco/XML/include;..\3rdParty\irrlicht-1.7.3\include\;../BriskOpenCV/brisk</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_USE_MATH_DEFINES;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\3rdParty\Poco\lib;..\3rdParty\irrlicht-1.7.3\lib\Win32-visualstudio\</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>../BriskOpenCV/agast/include;../AR/include;../3rdParty/Poco/Foundation/include;../3rdParty/Poco/XML/include;..\3rdParty\irrlicht-1.7.3\include\;../BriskOpenCV/brisk</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_USE_MATH_DEFINES;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>..\3rdParty\Poco\lib;..\3rdParty\irrlicht-1.7.3\lib\Win32-visualstudio\</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
