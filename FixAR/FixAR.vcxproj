@@ -76,7 +76,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../BriskOpenCV/agast/include;../AR/include;../3rdParty/Poco/Foundation/include;../3rdParty/Poco/XML/include;..\3rdParty\irrlicht-1.7.3\include\;../BriskOpenCV/brisk</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_USE_MATH_DEFINES;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_USE_MATH_DEFINES;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

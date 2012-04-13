@@ -57,6 +57,9 @@ using namespace ar;
 const int WIN_WIDTH  = 640;
 const int WIN_HEIGHT = 480;
 
+bool gRunning = true;
+Pose gPose;
+
 Mat getHomography(Mat &queryImg)
 {
 	Mat H;
@@ -103,6 +106,14 @@ Mat getHomography(Mat &queryImg)
 
 	cout << "match keypoint number: " << matches.size() << endl;
 
+	// convert keys to center aligned.
+	float scale = 1;
+	for(int i = 0; i < (int) templKeys.size(); i++){
+		/*templKeys[i].pt.x = (templKeys[i].pt.x-templImg.cols/2)/scale;
+		templKeys[i].pt.y = (templImg.rows/2 - templKeys[i].pt.y)/scale;*/
+		templKeys[i].pt.x = (templKeys[i].pt.x)/scale;
+		templKeys[i].pt.y = (templKeys[i].pt.y)/scale;
+	}
 	// find homography
 	// queryKeys = H*TemplKeys
 	vector<DMatch> goodMatches;
@@ -114,14 +125,56 @@ Mat getHomography(Mat &queryImg)
 	else{
 		cout << H << endl;
 		H = H.inv(DECOMP_SVD);
-		cout << H << endl;
 
 		//normalize
 		H = H * (1. / H.at<double>(2,2));
+		cout << H << endl;
+
+
+		/*Mat showImg;
+		warpPerspective (templImg, showImg, H, Size(640,480));
+		imshow("wrap", showImg);
+		cvWaitKey(0);*/
 	}
+
+	vector<Point2f> npts;
+	vector<Point2f> tpts;
+	npts.resize(matches.size());
+	tpts.resize(matches.size());
+	for(int i = 0; i < (int)matches.size(); i++){
+		npts[i] = queryKeys[matches[i].queryIdx].pt;
+		tpts[i] = templKeys[matches[i].trainIdx].pt;
+	}
+	H = findHomography(Mat(tpts), Mat(npts), CV_RANSAC, 3);
+
+	cout << " alt H: " << endl;
+	cout << H << endl;
 
 	return H;
 }
+
+void updatePose()
+{
+
+}
+
+class UpdaePoseEventReceiver: public IEventReceiver
+{
+public:
+	virtual bool onEvent(const SEvent& event)
+	{
+		if(event.EventType == irr::EET_KEY_INPUT_EVENT){
+			if(event.KeyInput.Key == KEY_ESCAPE){
+				gRunning = false;
+			}
+
+			if(event.KeyInput.Key == KEY_KEY_U){
+				updatePose();
+			}
+		}
+	}
+};
+
 int main(int argc, char *argv[])
 {
 
@@ -192,11 +245,16 @@ int main(int argc, char *argv[])
 	}
 
 	// Add object 3-axis
+	float arrowScale = 20.f;
+	float arrowHeight = 10.f*arrowScale;
+	float arrowCylinderHeight = 5.f*arrowScale;
+	float arrowWidth0 = 0.2f*arrowScale;
+	float arrowWidth1 = 0.5f*arrowScale;
 	scene::ISceneNode *m_y_axis = smgr->addMeshSceneNode(
 		smgr->addArrowMesh("m_y-axis",
 		video::SColor(255, 0, 200, 0),
 		video::SColor(255, 0, 255, 0),
-		8, 18, 10.f, 5.f, 0.2f, 0.5f)
+		8, 18, arrowHeight, arrowCylinderHeight, arrowWidth0, arrowWidth1)
 		);
 
 	{
@@ -205,14 +263,14 @@ int main(int argc, char *argv[])
 			smgr->addArrowMesh("m_x-axis",
 			video::SColor(255, 200, 0, 0),
 			video::SColor(255, 255, 0, 0),
-			8, 18, 10.f, 5.f, 0.2f, 0.5f)
+			8, 18, arrowHeight, arrowCylinderHeight, arrowWidth0, arrowWidth1)
 			);
 
 		scene::ISceneNode *m_z_axis = smgr->addMeshSceneNode(
 			smgr->addArrowMesh("m_z-axis",
 			video::SColor(255, 0, 0, 200),
 			video::SColor(255, 0, 0, 255),
-			8, 18, 10.f, 5.f, 0.2f, 0.5f)
+			8, 18, arrowHeight, arrowCylinderHeight, arrowWidth0, arrowWidth1)
 			);
 
 		m_y_axis->addChild(m_x_axis);
@@ -235,8 +293,32 @@ int main(int argc, char *argv[])
 
 	ITexture *videoTexture = driver->addTexture(vector2d<u32>(WIN_WIDTH, WIN_HEIGHT), "video_stream");
 
-	smgr->addCameraSceneNode(0, vector3df(0, 30, -40), vector3df(0, 5, 0));
+	ICameraSceneNode *cam =  smgr->addCameraSceneNode(0, vector3df(0, 0, 0), vector3df(0, 0, 1));
+	cam->setNearValue(1);
+	cam->setFarValue(3000);
 
+	{
+
+	matrix4 oldProj = cam->getProjectionMatrix();
+
+	cout << " Proj: " << endl;
+	cout << oldProj[0] << " "
+		 << oldProj[1] << " "
+		 << oldProj[2] << " "
+		 << oldProj[3] << " " << endl
+		 << oldProj[4] << " "
+		 << oldProj[5] << " "
+		 << oldProj[6] << " "
+		 << oldProj[7] << " " << endl
+		 << oldProj[8] << " "
+		 << oldProj[9] << " "
+		 << oldProj[10] << " "
+		 << oldProj[11] << " " << endl
+		 << oldProj[12] << " " 
+		 << oldProj[13] << " "
+		 << oldProj[14] << " "
+		 << oldProj[15] << " " << endl;
+	}
 
 	// open camera.
 	VideoCapture capture(0);
@@ -250,6 +332,12 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	Mat _H = Mat::eye(3,3,CV_64F);
+	_H = _H * 0.5;
+	Mat testFrame;
+	Mat templImg = imread("../media/cvchina.jpg");
+	warpPerspective(templImg, testFrame, _H, Size(640,480));
+
 	// calc homography between the captured image and the template image.
 	Mat H = getHomography(videoFrame);
 	if(H.empty()){
@@ -260,13 +348,45 @@ int main(int argc, char *argv[])
 	// load camera intrices matrix
 	Mat K = loadCameraIntrinsic("../media/intrinsic.txt");
 
+	//matrix4 proj = oldProj;
+	//proj[0] = K.at<double>(0, 0);
+	//proj[4] = K.at<double>(1, 1);
+	//proj[2] = K.at<double>(0, 2);
+	//proj[5] = K.at<double>(1, 2);
+
+	//cam->setProjectionMatrix(proj);
+	float fov = 2*atan2(320, K.at<double>(0, 0));
+	cout << "fov: " << fov << endl;
+
+	cam->setFOV((float) fov );
+	cam->setAspectRatio(640/480.f);
+
+	cout << "fov: " << cam->getFOV() << endl;
+
 	// get model matrix.
-	Pose pose;
-	calcRTFromHomography(K, H, pose);
+	calcRTFromHomography(K, H, gPose);
+	//calcRTUsingRPP(K, H, gPose);
 
-	cout << pose.translation_ << endl;
+	// set ar scene.
+	float yaw, pitch, roll;
+	getYPR(gPose.rotation_, yaw, pitch, roll);
 
-	while(devices->run()){
+	cout << "yaw: " << yaw << " pitch: " << pitch << " roll: " << roll << endl;
+
+	Mat rotationVector;
+	Rodrigues(gPose.rotation_, rotationVector);
+
+	yaw = rotationVector.at<double>(0, 0) * 180 / CV_PI;
+	pitch = rotationVector.at<double>(1, 0) * 180 / CV_PI;
+	roll = rotationVector.at<double>(2, 0) * 180 / CV_PI;
+
+	cout <<" rotation vector: " << rotationVector << endl;
+
+	cout << "yaw: " << yaw << " pitch: " << pitch << " roll: " << roll << endl;
+
+	cout << gPose.translation_ << endl;
+
+	while(devices->run() && gRunning){
 		driver->beginScene(true, true, SColor(255, 100, 101, 140));
 
 		// draw video background Image
@@ -290,20 +410,22 @@ int main(int argc, char *argv[])
 		// draw video background
 		driver->draw2DImage(videoTexture, core::rect<s32>(0,0,WIN_WIDTH,WIN_HEIGHT), core::rect<s32>(0,0,WIN_WIDTH,WIN_HEIGHT));
 
-		// set ar scene.
-		float yaw, pitch, roll;
-		getYPR(pose.rotation_, yaw, pitch, roll);
-		vector3df rotation(yaw, pitch, roll);
+		vector3df rotation(-yaw, pitch, roll);
 		vector3df position;
-		position.X = (float) (pose.translation_.at<double>(0, 0));
-		position.Y = (float) (pose.translation_.at<double>(1, 0));
-		position.Z = (float) (pose.translation_.at<double>(2, 0));
+		position.X = (float) (gPose.translation_.at<double>(0, 0));
+		position.Y = (float) (-gPose.translation_.at<double>(1, 0));
+		position.Z = (float) (gPose.translation_.at<double>(2, 0));
+	
 
-		//node->setRotation(rotation);
+		//position.X = -20; position.Y = 0; position.Z = 2000;
+
+		node->setRotation(rotation);
 		node->setPosition(position);
 		node->setVisible(false);
 
-		//m_y_axis->setRotation(rotation);
+		w_y_axis->setVisible(false);
+
+		m_y_axis->setRotation(rotation);
 		m_y_axis->setPosition(position);
 
 		smgr->drawAll();

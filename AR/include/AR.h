@@ -14,6 +14,7 @@ namespace ar
 	};
 
 	bool calcRTFromHomography(const cv::Mat &K, const cv::Mat &H, Pose &pose);
+	bool calcRTUsingRPP(const cv::Mat &K, const cv::Mat &H, Pose &pose);
 	void getYPR(const cv::Mat &rotation, float &yaw, float &pitch, float &roll);
 
 	cv::Mat loadCameraIntrinsic(std::string path);
