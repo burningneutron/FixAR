@@ -4,7 +4,6 @@
 *.ilk
 *.pdb
 *.suo
-*.opensdf
 
 ipch/*
 Debug/*

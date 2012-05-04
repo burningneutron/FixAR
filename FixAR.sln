@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FixAR", "FixAR\FixAR.vcxproj", "{70B8013A-12C0-4DFA-851B-B8989A536629}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlaneTracking", "PlaneTracking\PlaneTracking.vcxproj", "{959355A4-517A-4FA2-A492-9CE39EEEDD51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{70B8013A-12C0-4DFA-851B-B8989A536629}.Debug|Win32.Build.0 = Debug|Win32
 		{70B8013A-12C0-4DFA-851B-B8989A536629}.Release|Win32.ActiveCfg = Release|Win32
 		{70B8013A-12C0-4DFA-851B-B8989A536629}.Release|Win32.Build.0 = Release|Win32
+		{959355A4-517A-4FA2-A492-9CE39EEEDD51}.Debug|Win32.ActiveCfg = Debug|Win32
+		{959355A4-517A-4FA2-A492-9CE39EEEDD51}.Debug|Win32.Build.0 = Debug|Win32
+		{959355A4-517A-4FA2-A492-9CE39EEEDD51}.Release|Win32.ActiveCfg = Release|Win32
+		{959355A4-517A-4FA2-A492-9CE39EEEDD51}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

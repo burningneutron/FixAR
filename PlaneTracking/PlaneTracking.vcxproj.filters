@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="agast">
+      <UniqueIdentifier>{05d5cdf0-6898-426b-9be9-70283c51e484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="agast\include">
+      <UniqueIdentifier>{9b3ec504-3b5e-4154-8454-a457b0f6dfd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="agast\include\agast">
+      <UniqueIdentifier>{b9f5d441-e255-4494-b8e2-7a7eca56c7f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="agast\src">
+      <UniqueIdentifier>{6b379ff5-4a6f-4466-b057-6d241e51c0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AR">
+      <UniqueIdentifier>{06a011d7-455d-45d3-9fad-94b1a0451dbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AR\include">
+      <UniqueIdentifier>{67ca8f26-87e3-4bdf-adf0-ebd7ba5a94bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AR\src">
+      <UniqueIdentifier>{68331fa8-306f-4018-9712-80c73f36df8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="brisk">
+      <UniqueIdentifier>{c49a7edd-9941-4d95-8377-234fc9a0679c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\agast5_8.h">
+      <Filter>agast\include\agast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\agast7_12d.h">
+      <Filter>agast\include\agast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\agast7_12s.h">
+      <Filter>agast\include\agast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\AstDetector.h">
+      <Filter>agast\include\agast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\cvWrapper.h">
+      <Filter>agast\include\agast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BriskOpenCV\agast\include\agast\oast9_16.h">
+      <Filter>agast\include\agast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AR\include\AR.h">
+      <Filter>AR\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AR\include\RobustEstimator.h">
+      <Filter>AR\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AR\include\Rpoly.h">
+      <Filter>AR\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AR\include\RPP.h">
+      <Filter>AR\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\AR\include\Utils.h">
+      <Filter>AR\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BriskOpenCV\brisk\brisk.h">
+      <Filter>brisk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BriskOpenCV\brisk\hammingsse.hpp">
+      <Filter>brisk</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast5_8.cc">
+      <Filter>agast\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast5_8_nms.cc">
+      <Filter>agast\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast7_12d.cc">
+      <Filter>agast\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast7_12d_nms.cc">
+      <Filter>agast\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast7_12s.cc">
+      <Filter>agast\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BriskOpenCV\agast\src\agast7_12s_nms.cc">
+      <Filter>agast\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BriskOpenCV\agast\src\AstDetector.cc">
+      <Filter>agast\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BriskOpenCV\agast\src\nonMaximumSuppression.cc">
+      <Filter>agast\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BriskOpenCV\agast\src\oast9_16.cc">
+      <Filter>agast\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BriskOpenCV\agast\src\oast9_16_nms.cc">
+      <Filter>agast\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AR\src\AR.cpp">
+      <Filter>AR\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AR\src\RobustEstimator.cpp">
+      <Filter>AR\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AR\src\Rpoly.cpp">
+      <Filter>AR\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AR\src\RPP.cpp">
+      <Filter>AR\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\AR\src\Utils.cpp">
+      <Filter>AR\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BriskOpenCV\brisk\brisk.cpp">
+      <Filter>brisk</Filter>
+    </ClCompile>
+    <ClCompile Include="main_PlaneTracking.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
